@@ -22,6 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         cd python
+        uv venv
         uv pip install -e ".[dev]"
     - name: Run ruff check
       run: |
@@ -51,6 +52,7 @@ jobs:
       - name: Install dependencies
         run: |
           cd python
+          uv venv
           uv pip install -e ".[test]"
       - name: Run integration tests
         env:
