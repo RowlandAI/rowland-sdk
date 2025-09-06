@@ -64,5 +64,5 @@ Supports 40+ document types including leases, deeds, assignments, JOAs, division
 
 ## Requirements
 
-- Python 3.8+
+- Python 3.10+
 - API key from Rowland
