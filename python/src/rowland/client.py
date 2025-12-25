@@ -12,7 +12,7 @@ from .models import Document, DocumentExtractionResponse, PaginatedResponse
 
 
 class DocumentsApiClient:
-    """Documents API client matching the C# SDK."""
+    """Documents API client"""
 
     def __init__(
         self,
