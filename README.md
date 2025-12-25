@@ -19,10 +19,9 @@ These SDKs handle authentication, request/response serialization, error handling
 
 ## Available SDKs
 
-| Language | Package | Documentation | Installation |
-|----------|---------|---------------|--------------|
+| Language   | Package                                        | Documentation     | Installation          |
+|------------|------------------------------------------------|-------------------|-----------------------|
 | **Python** | [`rowland`](https://pypi.org/project/rowland/) | [Docs](./python/) | `pip install rowland` |
-| **C# (.NET)** | [`Rowland.Sdk`](https://www.nuget.org/packages/Rowland.Sdk/) | [Docs](./dotnet/) | `dotnet add package Rowland.Sdk` |
 
 ## Quick Integration Examples
 
@@ -44,28 +43,6 @@ with DocumentsApiClient(api_key="your-api-key") as client:
         extractions = client.get_document_extractions(document.id)
         # Use extracted data in your application logic
         process_contract_data(extractions.consolidated_objects)
-```
-
-### C# (.NET)
-```csharp
-using DocumentsApi.Sdk.Clients;
-
-var client = new DocumentsApiClient(httpClient, "your-api-key");
-
-// Upload document for processing
-using var fileStream = File.OpenRead("contract.pdf");
-var document = await client.UploadDocumentAsync(fileStream, "contract.pdf");
-
-// Monitor processing status
-Console.WriteLine($"Processing document: {document.Id}");
-
-// Retrieve structured data when complete
-if (document.Status == DocumentStatus.Success)
-{
-    var extractions = await client.GetDocumentExtractionsAsync(document.Id);
-    // Integrate extracted data into your business logic
-    await ProcessContractDataAsync(extractions.ConsolidatedObjects);
-}
 ```
 
 ## Rowland API Capabilities
@@ -133,16 +110,6 @@ client = DocumentsApiClient(
     timeout=30,  # Optional: request timeout in seconds
     max_retries=3  # Optional: retry failed requests
 )
-```
-
-```csharp
-// C# configuration
-var httpClient = new HttpClient()
-{
-    BaseAddress = new Uri("https://api.rowland.ai"),
-    Timeout = TimeSpan.FromSeconds(30)
-};
-var client = new DocumentsApiClient(httpClient, "your-api-key");
 ```
 
 ## Integration Patterns
