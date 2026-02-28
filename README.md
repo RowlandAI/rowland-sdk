@@ -173,6 +173,35 @@ completed = client.wait_for_completion([doc.id for doc in documents])
 
 We welcome contributions from enterprise developers!
 
+### Development Setup
+
+Prerequisites:
+- [mise-en-place](https://mise.jdx.dev/getting-started.html)
+
+```bash
+mise trust
+mise install
+```
+
+#### With Mise
+
+```bash
+mise run setup    # Install dependencies
+mise run test     # Run tests
+mise run quality  # Run linting and type checks
+```
+
+#### Manually
+
+```bash
+cd python
+uv venv && source .venv/bin/activate
+uv pip install -e '.[dev,test]'
+uv run pytest
+uv run ruff check --fix . && uv run ruff format .
+uv run mypy src
+```
+
 ## License
 
 Licensed under the MIT License - see [LICENSE](LICENSE) for details.

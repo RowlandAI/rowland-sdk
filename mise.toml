@@ -1,0 +1,54 @@
+[tools]
+node = '24'
+pnpm = "latest"
+python = '3.12'
+uv = "latest"
+
+[settings]
+python.uv_venv_auto = true
+
+# Environment Setup
+
+[tasks.venv_setup]
+description = "Set up the Python virtual environment"
+run = "cd python && uv venv && source .venv/bin/activate"
+hide = true
+
+[tasks.install_deps]
+description = "Install Python project dependencies"
+run = "cd python && uv pip install -e '.[dev,test]'"
+hide = true
+depends = "venv_setup"
+
+[tasks.setup]
+description = "Set up the development environment"
+depends = ["install_deps"]
+
+# Developer tasks
+
+[tasks.test]
+description = "Run all tests with pytest"
+run = "cd python && uv run pytest"
+
+[tasks.coverage]
+description = "Run all tests with pytest & coverage reporting"
+run = "cd python && uv run pytest --cov=src/rowland"
+
+[tasks.lint-ruff-format]
+description = "Run Ruff for formatting"
+run = "cd python && uv run ruff format ."
+hide = true
+
+[tasks.lint-ruff-check]
+description = "Run Ruff for linting and fixing issues"
+run = "cd python && uv run ruff check --fix ."
+hide = true
+
+[tasks.lint-types]
+description = "Run MyPy for type checking"
+run = "cd python && uv run mypy src"
+hide = true
+
+[tasks.quality]
+description = "Run code quality checks"
+depends = ["lint-ruff-format", "lint-ruff-check", "lint-types"]
