@@ -186,12 +186,14 @@ mise install
 #### With Mise
 
 ```bash
-mise run setup    # Install dependencies
-mise run test     # Run tests
-mise run quality  # Run linting and type checks
+mise setup    # Install dependencies
+mise test     # Run tests
+mise coverage # Run tests with coverage reporting
+mise quality  # Run linting and type checks
 ```
 
-#### Manually
+<details>
+<summary>Manual</summary>
 
 ```bash
 cd python
@@ -201,6 +203,8 @@ uv run pytest
 uv run ruff check --fix . && uv run ruff format .
 uv run mypy src
 ```
+
+</details>
 
 ## License
 
