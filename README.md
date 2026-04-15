@@ -19,9 +19,9 @@ These SDKs handle authentication, request/response serialization, error handling
 
 ## Available SDKs
 
-| Language   | Package                                        | Documentation     | Installation          |
-| ---------- | ---------------------------------------------- | ----------------- | --------------------- |
-| **Python** | [`rowland`](https://pypi.org/project/rowland/) | [Docs](./python/) | `pip install rowland` |
+| Language   | Package                                            | Documentation     | Installation              |
+| ---------- | -------------------------------------------------- | ----------------- | ------------------------- |
+| **Python** | [`rowland`](https://pypi.org/project/rowland-sdk/) | [Docs](./python/) | `pip install rowland-sdk` |
 
 ## Quick Integration Examples
 

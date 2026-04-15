@@ -5,7 +5,7 @@ Python SDK for the Rowland Documents API.
 ## Installation
 
 ```bash
-pip install rowland
+pip install rowland-sdk
 ```
 
 ## Quick Start
@@ -45,7 +45,7 @@ with DocumentsApiClient(api_key="your-api-key") as client:
     # Upload document
     with open("document.pdf", "rb") as f:
         doc = client.upload_document(f, "document.pdf")
-    
+
     # Client automatically closes
 ```
 
