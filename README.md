@@ -6,10 +6,9 @@
 
 Enterprise client libraries and developer tools for integrating with Rowland's AI-first platform APIs.
 
-![Version](https://img.shields.io/badge/version-0.0.1-blue)
+![Version](https://img.shields.io/pypi/v/rowland-sdk)
 ![License](https://img.shields.io/badge/license-MIT-green)
 ![Python](https://img.shields.io/badge/python-3.10+-blue)
-![.NET](https://img.shields.io/badge/.net-9.0+-purple)
 
 ## Overview
 
