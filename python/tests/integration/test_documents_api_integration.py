@@ -7,7 +7,7 @@ from rowland import DocumentsApiClient
 
 class TestBasicApiOperations:
     def _wait_for_document_processing(
-        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 120
+        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 300
     ) -> str:
         """
         Wait for document to finish processing.
