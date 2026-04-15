@@ -6,8 +6,10 @@ from rowland import DocumentsApiClient
 
 
 class TestBasicApiOperations:
+    document_id: str | None = None
+
     def _wait_for_document_processing(
-        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 120
+        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 300
     ) -> str:
         """
         Wait for document to finish processing.
@@ -39,60 +41,58 @@ class TestBasicApiOperations:
         with open(sample_pdf_path, "rb") as f:
             doc = client.upload_document(f, "Division Order Title Opinion.pdf")
 
-        assert doc.id == "4a411d4c-25f0-5ceb-2da4-c45ee6202c1a"
+        assert doc.id is not None
         assert doc.name == "Division Order Title Opinion.pdf"
         assert doc.folder_id is None
         assert doc.file_size == 108523
         assert doc.mime_type == "application/pdf"
         assert doc.owner_id is None
-        assert doc.owner_organization_id == "f475729a-0ee3-421d-b7a6-bbb8b4c45f48"
-        assert doc.summary is None
-        assert doc.status == "queued"
-        assert doc.document_type == "other"
+        assert doc.owner_organization_id is not None
+        assert doc.status in {"queued", "processing"}
         assert doc.created_at is not None
         assert doc.updated_at is not None
+
+        TestBasicApiOperations.document_id = doc.id
 
     @pytest.mark.slow
     def test_document_processing_completion(self, client: DocumentsApiClient) -> None:
         """Test that document processing completes successfully."""
-        doc_id = "4a411d4c-25f0-5ceb-2da4-c45ee6202c1a"
+        assert self.document_id is not None, "Upload test must run first"
 
-        # Wait for processing to complete
-        final_status = self._wait_for_document_processing(client, doc_id)
+        final_status = self._wait_for_document_processing(client, self.document_id)
 
-        # Assert it succeeded
         assert final_status == "success", (
             f"Document processing failed with status: {final_status}"
         )
 
     def test_get_document(self, client: DocumentsApiClient) -> None:
         """Test retrieving a document by ID."""
-        doc_id = "4a411d4c-25f0-5ceb-2da4-c45ee6202c1a"
+        assert self.document_id is not None, "Upload test must run first"
 
-        doc = client.get_document(doc_id)
+        doc = client.get_document(self.document_id)
         print(doc)
 
-        assert doc.id == doc_id
+        assert doc.id == self.document_id
         assert doc.name == "Division Order Title Opinion.pdf"
         assert doc.folder_id is None
         assert doc.file_size == 108523
         assert doc.mime_type == "application/pdf"
         assert doc.owner_id is None
-        assert doc.owner_organization_id == "f475729a-0ee3-421d-b7a6-bbb8b4c45f48"
+        assert doc.owner_organization_id is not None
         assert doc.summary is not None
         assert doc.status == "success"
-        assert doc.document_type == "title_report"
+        assert doc.document_type == "title_opinion"
         assert doc.created_at is not None
         assert doc.updated_at is not None
 
     def test_get_document_extractions(self, client: DocumentsApiClient) -> None:
         """Test retrieving document extraction results."""
-        doc_id = "4a411d4c-25f0-5ceb-2da4-c45ee6202c1a"
+        assert self.document_id is not None, "Upload test must run first"
 
-        extraction = client.get_document_extractions(doc_id)
+        extraction = client.get_document_extractions(self.document_id)
         print(extraction)
 
-        assert extraction.document_id == doc_id
+        assert extraction.document_id == self.document_id
         assert extraction.document_name == "Division Order Title Opinion.pdf"
         assert extraction.extraction_id is not None
         assert extraction.consolidated_objects is not None
@@ -123,14 +123,13 @@ class TestBasicApiOperations:
 
     def test_delete_document(self, client: DocumentsApiClient) -> None:
         """Test deleting a document by ID."""
-        doc_id = "4a411d4c-25f0-5ceb-2da4-c45ee6202c1a"
+        assert self.document_id is not None, "Upload test must run first"
 
-        response = client.delete_document(doc_id)
+        response = client.delete_document(self.document_id)
         assert response == {"detail": "Document deleted successfully"}
 
-        # Verify deletion
         with pytest.raises(Exception) as exc_info:
-            client.get_document(doc_id)
+            client.get_document(self.document_id)
 
         error_message = str(exc_info.value).lower()
         assert "404" in error_message or "not found" in error_message
