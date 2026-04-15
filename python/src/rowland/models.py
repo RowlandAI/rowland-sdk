@@ -55,6 +55,7 @@ class DocumentType(StrEnum):
     SOLAR_LEASE = "solar_lease"
     STIPULATION = "stipulation"
     SURFACE_USE_AGREEMENT = "surface_use_agreement"
+    TITLE_OPINION = "title_opinion"
     TITLE_REPORT = "title_report"
     UNITIZATION_AGREEMENT = "unitization_agreement"
     WELL_PROPOSAL = "well_proposal"

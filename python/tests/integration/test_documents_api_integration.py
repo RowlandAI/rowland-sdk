@@ -81,7 +81,7 @@ class TestBasicApiOperations:
         assert doc.owner_organization_id == "f475729a-0ee3-421d-b7a6-bbb8b4c45f48"
         assert doc.summary is not None
         assert doc.status == "success"
-        assert doc.document_type == "title_report"
+        assert doc.document_type == "title_opinion"
         assert doc.created_at is not None
         assert doc.updated_at is not None
 

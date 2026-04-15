@@ -101,5 +101,8 @@ exclude = ["^types/"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = ["integration: Integration tests (requires API key)"]
+markers = [
+    "integration: Integration tests (requires API key)",
+    "slow: Slow tests (e.g. waiting for document processing)",
+]
 addopts = ["-v"]
