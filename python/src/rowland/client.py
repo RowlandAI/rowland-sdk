@@ -17,7 +17,7 @@ class DocumentsApiClient:
     def __init__(
         self,
         api_key: str,
-        base_url: str = "https://documents.rowland.ai",
+        base_url: str = "https://processing.rowland.ai",
         timeout: float = 30.0,
     ):
         """Initialize the client.

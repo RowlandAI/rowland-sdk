@@ -1,13 +1,13 @@
 """Models for Rowland APIs."""
 
 from datetime import datetime
-from enum import Enum
+from enum import StrEnum
 from typing import Any, Generic, TypeVar
 
 from pydantic import BaseModel
 
 
-class DocumentStatus(str, Enum):
+class DocumentStatus(StrEnum):
     """Document processing status."""
 
     QUEUED = "queued"
@@ -16,7 +16,7 @@ class DocumentStatus(str, Enum):
     FAILED = "failed"
 
 
-class DocumentType(str, Enum):
+class DocumentType(StrEnum):
     """Document type classification."""
 
     AFFIDAVIT = "affidavit"

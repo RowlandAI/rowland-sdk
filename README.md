@@ -20,12 +20,13 @@ These SDKs handle authentication, request/response serialization, error handling
 ## Available SDKs
 
 | Language   | Package                                        | Documentation     | Installation          |
-|------------|------------------------------------------------|-------------------|-----------------------|
+| ---------- | ---------------------------------------------- | ----------------- | --------------------- |
 | **Python** | [`rowland`](https://pypi.org/project/rowland/) | [Docs](./python/) | `pip install rowland` |
 
 ## Quick Integration Examples
 
 ### Python
+
 ```python
 from rowland import DocumentsApiClient
 
@@ -34,10 +35,10 @@ with DocumentsApiClient(api_key="your-api-key") as client:
     # Upload document for processing
     with open("contract.pdf", "rb") as f:
         document = client.upload_document(f, "contract.pdf")
-    
+
     # Monitor processing status
     print(f"Processing document: {document.id}")
-    
+
     # Retrieve structured data when complete
     if document.status == "success":
         extractions = client.get_document_extractions(document.id)
@@ -50,6 +51,7 @@ with DocumentsApiClient(api_key="your-api-key") as client:
 These SDKs provide access to Rowland's enterprise APIs:
 
 ### Documents API
+
 Programmatically process energy industry documents and extract structured data.
 
 - **Document Upload & Processing** - Submit documents for AI analysis
@@ -59,6 +61,7 @@ Programmatically process energy industry documents and extract structured data.
 - **Webhook Integration** - Receive notifications when processing completes
 
 ### Workflows API
+
 Execute complex multi-step business processes programmatically.
 
 - **Workflow Execution** - Run pre-built or custom automation workflows
@@ -69,24 +72,28 @@ Execute complex multi-step business processes programmatically.
 ## SDK Features
 
 ### Production-Ready
+
 - Comprehensive error handling and retry logic
 - Connection pooling and request optimization
 - Configurable timeouts and rate limiting
 - Detailed logging and debugging support
 
 ### Enterprise Security
+
 - Secure API key authentication
 - TLS encryption for all communications
 - Request signing and validation
 - Audit logging capabilities
 
 ### Developer Experience
+
 - Strongly-typed models and responses
 - Comprehensive IntelliSense/autocomplete support
 - Detailed error messages and status codes
 - Extensive code examples and documentation
 
 ### Integration Support
+
 - Webhook handler utilities
 - Async/await support (where applicable)
 - Pagination helpers for large datasets
@@ -115,6 +122,7 @@ client = DocumentsApiClient(
 ## Integration Patterns
 
 ### Synchronous Processing
+
 For real-time applications requiring immediate results:
 
 ```python
@@ -130,12 +138,13 @@ if document.status == "success":
 ```
 
 ### Asynchronous Processing with Webhooks
+
 For scalable applications processing large volumes:
 
 ```python
 # Upload with webhook notification
 document = client.upload_document(
-    file_stream, 
+    file_stream,
     filename,
     webhook_url="https://yourapp.com/webhooks/rowland"
 )
@@ -145,6 +154,7 @@ document = client.upload_document(
 ```
 
 ### Batch Processing
+
 For high-volume document processing:
 
 ```python
@@ -161,7 +171,7 @@ completed = client.wait_for_completion([doc.id for doc in documents])
 
 ## Developer Resources
 
-- **[API Documentation](https://docs.rowland.ai)** - Complete API reference
+- **[API Documentation](https://www.rowland.ai/documentation)** - Complete API reference
 
 ## Enterprise Support
 
@@ -176,6 +186,7 @@ We welcome contributions from enterprise developers!
 ### Development Setup
 
 Prerequisites:
+
 - [mise-en-place](https://mise.jdx.dev/getting-started.html)
 
 ```bash
@@ -213,4 +224,4 @@ Licensed under the MIT License - see [LICENSE](LICENSE) for details.
 ---
 
 **Enterprise-grade SDKs for seamless Rowland API integration.**  
-*Built by developers, for developers.*
+_Built by developers, for developers._

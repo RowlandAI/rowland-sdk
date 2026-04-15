@@ -9,13 +9,8 @@ description = "Rowland SDK for Python"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "MIT"
-authors = [
-    { name = "Nolan Tremelling", email = "nolan@rowland.com" },
-]
-dependencies = [
-    "httpx>=0.24.0",
-    "pydantic>=2.0.0",
-]
+authors = [{ name = "Rowland Engineering", email = "engineering@rowland.com" }]
+dependencies = ["httpx>=0.24.0", "pydantic>=2.0.0"]
 
 [project.optional-dependencies]
 dev = [
@@ -25,14 +20,11 @@ dev = [
     "pytest-cov>=4.0.0",
     "python-dotenv>=1.0.0",
 ]
-test = [
-    "pytest>=7.0.0",
-    "python-dotenv>=1.0.0",
-]
+test = ["pytest>=7.0.0", "python-dotenv>=1.0.0"]
 
 [project.urls]
 Homepage = "https://rowland.ai"
-Documentation = "https://docs.rowland.ai"
+Documentation = "https://rowland.ai/documentation"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/rowland"]
@@ -67,24 +59,19 @@ target-version = "py312"
 
 [tool.ruff.lint]
 select = [
-    "E",    # pycodestyle errors
-    "W",    # pycodestyle warnings
-    "F",    # Pyflakes
-    "I",    # isort
-    "N",    # pep8-naming
-    "UP",   # pyupgrade
-    "B",    # flake8-bugbear
-    "C4",   # flake8-comprehensions
-    "SIM",  # flake8-simplify
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
 ]
 
 # Allow unused variables when they start with an underscore
-ignore = [
-    "B008",
-    "F403",
-    "F405",
-    "UP046",
-]
+ignore = ["B008", "F403", "F405", "UP046"]
 
 [tool.ruff.format]
 quote-style = "double"
@@ -110,25 +97,9 @@ warn_unused_ignores = true
 warn_no_return = true
 warn_unreachable = true
 strict_equality = true
-exclude = [
-    "^types/",
-]
-
-[[tool.mypy.overrides]]
-module = [
-    "asyncpg.*",
-    "boto3.*",
-    "botocore.*",
-    "hatchet_sdk.*",
-    "mcp.*",
-    "psycopg2.*",
-    "pypdf.*",
-]
-ignore_missing_imports = true
+exclude = ["^types/"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-markers = [
-    "integration: Integration tests (requires API key)",
-]
+markers = ["integration: Integration tests (requires API key)"]
 addopts = ["-v"]
