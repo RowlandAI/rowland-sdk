@@ -71,7 +71,7 @@ jobs:
         working-directory: python
         run: |
           uv pip install dist/*.whl
-          python -c "import rowland; print('Package imported successfully')"
+          uv run python -c "import rowland; print('Package imported successfully')"
 
   test:
     runs-on: ubuntu-latest
