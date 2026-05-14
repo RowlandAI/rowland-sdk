@@ -16,11 +16,12 @@ dependencies = ["httpx>=0.24.0", "pydantic>=2.0.0"]
 dev = [
     "ruff>=0.1.0",
     "mypy>=1.0.0",
-    "pytest>=7.0.0",
+    "pytest>=9.0.3",
     "pytest-cov>=4.0.0",
+    "pygments>=2.20.0",
     "python-dotenv>=1.0.0",
 ]
-test = ["pytest>=7.0.0", "python-dotenv>=1.0.0"]
+test = ["pytest>=9.0.3", "pygments>=2.20.0", "python-dotenv>=1.0.0"]
 
 [project.urls]
 Homepage = "https://rowland.ai"
