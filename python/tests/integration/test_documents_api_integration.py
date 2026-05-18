@@ -13,15 +13,16 @@ class TestBasicApiOperations:
     ) -> str:
         """
         Wait for document to finish processing.
-        Returns the final status ('success' or 'failed').
+        Returns the final status ('success', 'failed', or 'cancelled').
         """
+        terminal_statuses = {"success", "failed", "cancelled"}
         start_time = time.time()
 
         while time.time() - start_time < max_wait:
             doc = client.get_document(doc_id)
             print(f"Document {doc_id} status: {doc.processing_status}")
 
-            if doc.processing_status in ["success", "failed"]:
+            if doc.processing_status in terminal_statuses:
                 return doc.processing_status
 
             time.sleep(5)
@@ -125,6 +126,7 @@ class TestBasicApiOperations:
                 "processing",
                 "success",
                 "failed",
+                "cancelled",
             }
             assert doc.created_at is not None
             assert doc.updated_at is not None
