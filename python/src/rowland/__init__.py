@@ -5,9 +5,9 @@ from .exceptions import RowlandAuthenticationError, RowlandError, RowlandHTTPErr
 from .models import (
     Document,
     DocumentExtractionResponse,
-    ProcessingStatus,
     DocumentType,
     PaginatedResponse,
+    ProcessingStatus,
 )
 
 __version__ = "1.0.0"

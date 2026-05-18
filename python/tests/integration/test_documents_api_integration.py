@@ -27,7 +27,10 @@ class TestBasicApiOperations:
             time.sleep(5)
 
         doc = client.get_document(doc_id)
-        pytest.fail(f"Document timed out after {max_wait}s. Final status: {doc.processing_status}")
+        pytest.fail(
+            f"Document timed out after {max_wait}s. "
+            + f"Final status: {doc.processing_status}"
+        )
 
     def test_health_check(self, client: DocumentsApiClient) -> None:
         """Test API health endpoint."""
@@ -117,7 +120,12 @@ class TestBasicApiOperations:
             assert doc.name is not None
             assert doc.file_size is not None
             assert doc.mime_type is not None
-            assert doc.processing_status in {"queued", "processing", "success", "failed"}
+            assert doc.processing_status in {
+                "queued",
+                "processing",
+                "success",
+                "failed",
+            }
             assert doc.created_at is not None
             assert doc.updated_at is not None
 
