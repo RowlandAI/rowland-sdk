@@ -7,13 +7,14 @@ from typing import Any, Generic, TypeVar
 from pydantic import BaseModel
 
 
-class DocumentStatus(StrEnum):
+class ProcessingStatus(StrEnum):
     """Document processing status."""
 
     QUEUED = "queued"
     PROCESSING = "processing"
     SUCCESS = "success"
     FAILED = "failed"
+    CANCELLED = "cancelled"
 
 
 class DocumentType(StrEnum):
@@ -61,6 +62,12 @@ class DocumentType(StrEnum):
     WELL_PROPOSAL = "well_proposal"
     WIND_LEASE = "wind_lease"
     OTHER = "other"
+    ABSTRACT_OF_TITLE = "abstract_of_title"
+    DRILLING_PERMIT = "drilling_permit"
+    PRODUCTION_REPORT = "production_report"
+    JIB_STATEMENT = "jib_statement"
+    ENVIRONMENTAL_ASSESSMENT = "environmental_assessment"
+    REVENUE_STATEMENT = "revenue_statement"
 
 
 class Document(BaseModel):
@@ -75,7 +82,7 @@ class Document(BaseModel):
     owner_id: str | None = None
     owner_organization_id: str | None = None
     summary: str | None = None
-    status: DocumentStatus
+    processing_status: ProcessingStatus
     document_type: DocumentType = DocumentType.OTHER
     created_at: datetime | None = None
     updated_at: datetime | None = None

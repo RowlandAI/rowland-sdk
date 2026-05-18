@@ -19,15 +19,15 @@ class TestBasicApiOperations:
 
         while time.time() - start_time < max_wait:
             doc = client.get_document(doc_id)
-            print(f"Document {doc_id} status: {doc.status}")
+            print(f"Document {doc_id} status: {doc.processing_status}")
 
-            if doc.status in ["success", "failed"]:
-                return doc.status
+            if doc.processing_status in ["success", "failed"]:
+                return doc.processing_status
 
             time.sleep(5)
 
         doc = client.get_document(doc_id)
-        pytest.fail(f"Document timed out after {max_wait}s. Final status: {doc.status}")
+        pytest.fail(f"Document timed out after {max_wait}s. Final status: {doc.processing_status}")
 
     def test_health_check(self, client: DocumentsApiClient) -> None:
         """Test API health endpoint."""
@@ -48,7 +48,7 @@ class TestBasicApiOperations:
         assert doc.mime_type == "application/pdf"
         assert doc.owner_id is None
         assert doc.owner_organization_id is not None
-        assert doc.status in {"queued", "processing"}
+        assert doc.processing_status in {"queued", "processing"}
         assert doc.created_at is not None
         assert doc.updated_at is not None
 
@@ -80,7 +80,7 @@ class TestBasicApiOperations:
         assert doc.owner_id is None
         assert doc.owner_organization_id is not None
         assert doc.summary is not None
-        assert doc.status == "success"
+        assert doc.processing_status == "success"
         assert doc.document_type == "title_opinion"
         assert doc.created_at is not None
         assert doc.updated_at is not None
@@ -117,7 +117,7 @@ class TestBasicApiOperations:
             assert doc.name is not None
             assert doc.file_size is not None
             assert doc.mime_type is not None
-            assert doc.status in {"queued", "processing", "success", "failed"}
+            assert doc.processing_status in {"queued", "processing", "success", "failed"}
             assert doc.created_at is not None
             assert doc.updated_at is not None
 
