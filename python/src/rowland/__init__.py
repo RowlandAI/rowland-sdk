@@ -5,9 +5,9 @@ from .exceptions import RowlandAuthenticationError, RowlandError, RowlandHTTPErr
 from .models import (
     Document,
     DocumentExtractionResponse,
-    DocumentStatus,
     DocumentType,
     PaginatedResponse,
+    ProcessingStatus,
 )
 
 __version__ = "1.0.0"
@@ -15,7 +15,7 @@ __all__ = [
     "DocumentsApiClient",
     "Document",
     "DocumentExtractionResponse",
-    "DocumentStatus",
+    "ProcessingStatus",
     "DocumentType",
     "PaginatedResponse",
     "RowlandError",

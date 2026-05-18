@@ -18,7 +18,7 @@ def main() -> None:
         print(f"Found {documents.total} documents")
 
         for doc in documents.items:
-            print(f"- {doc.name} ({doc.status})")
+            print(f"- {doc.name} ({doc.processing_status})")
 
 
 if __name__ == "__main__":
