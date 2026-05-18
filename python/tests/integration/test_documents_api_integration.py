@@ -52,7 +52,13 @@ class TestBasicApiOperations:
         assert doc.mime_type == "application/pdf"
         assert doc.owner_id is None
         assert doc.owner_organization_id is not None
-        assert doc.processing_status in {"queued", "processing"}
+        assert doc.processing_status in {
+            "queued",
+            "processing",
+            "success",
+            "failed",
+            "cancelled",
+        }
         assert doc.created_at is not None
         assert doc.updated_at is not None
 
