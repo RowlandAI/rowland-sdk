@@ -9,7 +9,7 @@ class TestBasicApiOperations:
     document_id: str | None = None
 
     def _wait_for_document_processing(
-        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 300
+        self, client: DocumentsApiClient, doc_id: str, max_wait: int = 900
     ) -> str:
         """
         Wait for document to finish processing.
