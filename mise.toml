@@ -52,3 +52,52 @@ hide = true
 [tasks.quality]
 description = "Run code quality checks"
 depends = ["lint-ruff-format", "lint-ruff-check", "lint-types"]
+
+# Release
+
+[tasks.release]
+description = "Bump version, push to main, tag, and open a pre-filled GitHub Release draft (usage: mise run release <major|minor|patch>)"
+run = """
+set -e
+
+BUMP_TYPE="${1:-}"
+if [[ -z "$BUMP_TYPE" ]]; then
+  echo "Usage: mise run release <major|minor|patch>" >&2
+  exit 1
+fi
+
+CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
+if [[ "$CURRENT_BRANCH" != "main" ]]; then
+  echo "Releases must be cut from main (currently on $CURRENT_BRANCH)." >&2
+  exit 1
+fi
+if [[ -n "$(git status --porcelain)" ]]; then
+  echo "Working tree is not clean. Commit or stash changes first." >&2
+  exit 1
+fi
+
+git pull --ff-only origin main
+
+cd python
+uv version --bump "$BUMP_TYPE"
+NEW_VERSION=$(uv version --short)
+cd ..
+
+TAG="v$NEW_VERSION"
+git commit -am "chore: release $TAG"
+git tag "$TAG"
+git push origin main "$TAG"
+
+RELEASE_URL="https://github.com/RowlandAI/rowland-sdk/releases/new?tag=$TAG&title=$TAG"
+echo ""
+echo "Pushed $TAG bump and tag to main."
+echo "Draft & publish the GitHub Release here:"
+echo ""
+echo "  $RELEASE_URL"
+
+if command -v open >/dev/null 2>&1; then
+  open "$RELEASE_URL"
+elif command -v xdg-open >/dev/null 2>&1; then
+  xdg-open "$RELEASE_URL"
+fi
+"""

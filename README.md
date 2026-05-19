@@ -216,6 +216,20 @@ uv run mypy src
 
 </details>
 
+### Releasing
+
+Publishing to PyPI is handled by the [Publish workflow](.github/workflows/publish.yaml), which is triggered when a GitHub Release is published. The version in `python/pyproject.toml` is the source of truth — bump it on `main` first, then tag that commit via a GitHub Release.
+
+1. From a clean `main`, run the `release` task with the desired bump type:
+
+   ```bash
+   mise run release patch   # or: minor, major
+   ```
+
+   The task bumps `python/pyproject.toml` and `python/uv.lock`, commits the change, tags it `vX.Y.Z`, pushes both to `main`, and opens a pre-filled GitHub Release draft in your browser.
+
+2. In the GitHub UI, click **Generate release notes** (optional), then **Publish release**. Publishing triggers the workflow that builds and uploads the package to PyPI.
+
 ## License
 
 Licensed under the MIT License - see [LICENSE](LICENSE) for details.
