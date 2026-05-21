@@ -71,7 +71,7 @@ jobs:
         working-directory: python
         run: |
           uv pip install dist/*.whl
-          uv run python -c "import rowland; print('Package imported successfully')"
+          uv run python -c "import rowland; assert rowland.__version__ != '0.0.0+unknown', f'__version__ unresolved: {rowland.__version__!r}'; print(f'imported rowland {rowland.__version__}')"
 
   test:
     runs-on: ubuntu-latest
